@@ -121,6 +121,10 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
   </nav>
 </div>
 
@@ -188,7 +192,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">更新于</span>
-        <time title="修改时间：2021-08-28 10:04:07" itemprop="dateModified" datetime="2021-08-28T10:04:07+08:00">2021-08-28</time>
+        <time title="修改时间：2021-08-29 00:38:41" itemprop="dateModified" datetime="2021-08-29T00:38:41+08:00">2021-08-29</time>
       </span>
 
   
@@ -447,6 +451,134 @@
 </tr>
 </tbody></table>
 <p>10对应的校验码为2 与身份证号的校验码相同代表身份证号正确</p>
+<h2 id="生成身份证号"><a href="#生成身份证号" class="headerlink" title="生成身份证号"></a>生成身份证号</h2><ol>
+<li>根据第二种身份证验证规则，先获取到身份证地址码。例如:北京市东城区对应地址码为110101。</li>
+<li>生成出生日期码。例如:2000年01月01日对应出生日期码为20000101。</li>
+<li>生成顺序码，对同年、同月、同日出生的人编定的顺序号，顺序码的奇数分配给男性，偶数分配给女性。例如：顺序码为111（代表男性）</li>
+<li>至此我们可以得到身份证号的前17位，得到11010120000101111？现在我们字需要计算出最后一位校验码即可。</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>$$i$$</th>
+<th>18</th>
+<th>17</th>
+<th>16</th>
+<th>15</th>
+<th>14</th>
+<th>13</th>
+<th>12</th>
+<th>11</th>
+<th>10</th>
+<th>9</th>
+<th>8</th>
+<th>7</th>
+<th>6</th>
+<th>5</th>
+<th>4</th>
+<th>3</th>
+<th>2</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>$$a_i$$</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>？</td>
+</tr>
+<tr>
+<td>$$w_i$$</td>
+<td>7</td>
+<td>9</td>
+<td>10</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+<td>6</td>
+<td>3</td>
+<td>7</td>
+<td>9</td>
+<td>10</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$$a_i \times W_i$$</td>
+<td>7</td>
+<td>9</td>
+<td>0</td>
+<td>5</td>
+<td>0</td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>9</td>
+<td>0</td>
+<td>5</td>
+<td>8</td>
+<td>4</td>
+<td>2</td>
+<td>？</td>
+</tr>
+</tbody></table>
+<p>   $$57\quad(mod\quad11)=2$$<br>余数和校验码对应关系</p>
+<table>
+<thead>
+<tr>
+<th>余数</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>校验码</td>
+<td>1</td>
+<td>0</td>
+<td>X</td>
+<td>9</td>
+<td>8</td>
+<td>7</td>
+<td>6</td>
+<td>5</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+</tr>
+</tbody></table>
+<p>余数2对应的校验码为X，所以身份证号码为<strong>11010120000101111X</strong>。</p>
 
       
     </div>
